@@ -7,7 +7,7 @@ import time
 port = 5000
 
 # Define the path to the project directory
-project_dir = '/home/pi/eep'
+project_dir = '/home/pi/'
 
 # Define a function to perform the update
 def perform_update(update_archive):
@@ -21,9 +21,20 @@ def perform_update(update_archive):
         shutil.rmtree(backup_dir)
     shutil.copytree(project_dir, backup_dir)
 
-    # Replace the existing project directory with the contents of the update archive
-    shutil.rmtree(project_dir)
-    shutil.copytree(temp_dir, project_dir)
+    # Iterate over the files in the temporary directory and compare them to the existing files
+    for dirpath, dirnames, filenames in os.walk(temp_dir):
+        for filename in filenames:
+            src_path = os.path.join(dirpath, filename)
+            rel_path = os.path.relpath(src_path, temp_dir)
+            dst_path = os.path.join(project_dir, rel_path)
+            if os.path.exists(dst_path) and filecmp.cmp(src_path, dst_path):
+                # The file already exists and hasn't changed, so skip it
+                continue
+            # The file is new or has changed, so copy it to the project directory
+            dst_dir = os.path.dirname(dst_path)
+            if not os.path.exists(dst_dir):
+                os.makedirs(dst_dir)
+            shutil.copy2(src_path, dst_path)
 
     # Cleanup the temporary directory
     shutil.rmtree(temp_dir)
