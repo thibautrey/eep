@@ -33,6 +33,7 @@ EOT
     # Set permissions on service file
     sudo chown root:root /etc/systemd/system/main.service
     sudo chmod 644 /etc/systemd/system/main.service
+    sudo systemctl start main.service
 
     # Enable the service
     sudo systemctl enable main.service
@@ -58,6 +59,7 @@ EOT
     # Set permissions on service file
     sudo chown root:root /etc/systemd/system/update.service
     sudo chmod 644 /etc/systemd/system/update.service
+    sudo systemctl start update.service
 
     # Enable the service
     sudo systemctl enable update.service
