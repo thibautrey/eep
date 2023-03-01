@@ -9,15 +9,15 @@ port = 5000
 
 # Define the path to the project directory
 project_dir = '/home/pi/eep/'
+backup_dir = os.path.join(project_dir, 'backup/')
+temp_dir = os.path.join(project_dir, 'temp/')
 
 # Define a function to perform the update
 def perform_update(update_archive):
     # Extract the contents of the update archive to a temporary directory
-    temp_dir = os.path.join(project_dir, 'temp/')
     shutil.unpack_archive(update_archive, temp_dir)
 
     # Backup the existing project directory
-    backup_dir = os.path.join(project_dir, 'backup/')
     if os.path.exists(backup_dir):
         shutil.rmtree(backup_dir)
     shutil.copytree(project_dir, backup_dir)

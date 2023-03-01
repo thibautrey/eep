@@ -40,9 +40,17 @@ EOT
 fi
 
 # Check if update.service file already exists
-if [ ! -f /etc/systemd/system/update.service ]; then
-    # Create the update.service file
-    sudo tee /etc/systemd/system/update.service > /dev/null <<EOT
+if [ -f /etc/systemd/system/update.service ]; then
+    # Stop and disable the existing service
+    sudo systemctl stop update.service
+    sudo systemctl disable update.service
+
+    # Remove the existing service file
+    sudo rm /etc/systemd/system/update.service
+fi
+
+# Create the update.service file
+sudo tee /etc/systemd/system/update.service > /dev/null <<EOT
 [Unit]
 Description=Eep Update Service
 After=network.target
@@ -51,19 +59,19 @@ After=network.target
 User=pi
 WorkingDirectory=/home/pi/eep/
 ExecStart=/bin/bash /home/pi/eep/update.sh
+Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target
 EOT
 
-    # Set permissions on service file
-    sudo chown root:root /etc/systemd/system/update.service
-    sudo chmod 644 /etc/systemd/system/update.service
-    sudo systemctl start update.service
+# Set permissions on service file
+sudo chown root:root /etc/systemd/system/update.service
+sudo chmod 644 /etc/systemd/system/update.service
 
-    # Enable the service
-    sudo systemctl enable update.service
-fi
+# Start and enable the service
+sudo systemctl start update.service
+sudo systemctl enable update.service
 
 # Reload systemd
 sudo systemctl daemon-reload
