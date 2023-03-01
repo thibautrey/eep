@@ -1,7 +1,7 @@
 import time
 import threading
 from liveView import liveView
-from button_handler import *
+from buttons_handler import *
 
 # Create thread for liveView
 thread1 = threading.Thread(target=current_view)
