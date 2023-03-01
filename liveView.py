@@ -1,7 +1,6 @@
 import cv2
 import numpy as np
 import threading
-from buttons_handler import current_view
 
 def liveView():
     # Initialize camera capture
@@ -19,7 +18,7 @@ def liveView():
     cv2.setWindowProperty('Live View', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
     # Start the video feed loop
-    while current_view == liveView:
+    while True:
         # Capture a frame from the camera
         ret, frame = cap.read()
 
