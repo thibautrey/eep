@@ -2,13 +2,10 @@
 
 # Install required packages
 sudo apt-get update
-sudo apt-get install python3 python3-pip python3-picamera python3-gpiozero
+sudo apt-get install python3 python3-pip python3-picamera python3-gpiozero python-dev python-bzutils libbz2-dev libcfitsio-dev libcairo2-dev libjpeg-dev libgif-dev apt-get install netpbm
 
 # Install Python packages
 sudo pip3 install flask opencv-python imutils
-
-# Copy project files to /home/pi/eep
-sudo cp -R . /home/pi/eep
 
 # Set permissions on project directory
 sudo chown -R pi:pi /home/pi/eep
