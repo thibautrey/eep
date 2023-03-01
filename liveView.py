@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 import threading
-from button_handler import current_view
+from buttons_handler import current_view
 
 def liveView():
     # Initialize camera capture
