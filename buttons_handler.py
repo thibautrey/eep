@@ -3,7 +3,7 @@ from liveView import liveView
 from stackingView import stackingView
 
 # Define the GPIO pins for the buttons
-button_pin = 17
+button_pin = 10
 
 # Define the current view as liveView
 current_view = liveView
