@@ -7,7 +7,7 @@ import time
 port = 5000
 
 # Define the path to the project directory
-project_dir = '/home/pi/'
+project_dir = '/home/pi/eep'
 
 # Define a function to perform the update
 def perform_update(update_archive):
