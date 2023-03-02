@@ -2,10 +2,10 @@
 #include <opencv2/core.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/highgui.hpp>
-#include "alignement.cpp"
-#include "remove_light_pollution.cpp"
-#include "stack_images.cpp"
-#include "draw_constellations.cpp"
+//#include "alignement.cpp"
+//#include "remove_light_pollution.cpp"
+//#include "stack_images.cpp"
+//#include "draw_constellations.cpp"
 
 using namespace cv;
 
@@ -30,17 +30,17 @@ int main() {
         Mat frame;
         capture.read(frame);
 
-        removeLightPollution(frame);
+        // removeLightPollution(frame);
 
         // Add the frame to the list of input images
         inputImages.push_back(frame);
 
         // If we have enough input images, stack them and display the result on the default display
         if (inputImages.size() >= 10) {
-            alignImages(inputImages);
+            // alignImages(inputImages);
             
             Mat stackedImage;
-            stackImages(inputImages, stackedImage);
+            //stackImages(inputImages, stackedImage);
 
             // Convert the stacked image to 16-bit color format for display on the default display
             Mat displayImage;
