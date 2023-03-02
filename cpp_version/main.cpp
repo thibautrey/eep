@@ -7,6 +7,7 @@
 #include "alignement.cpp"
 #include "remove_light_pollution.cpp"
 #include "stack_images.cpp"
+#include "draw_constellation.cpp"
 
 #define TFT_CS 1
 #define TFT_DC 0
@@ -36,6 +37,11 @@ int main() {
     capture.set(CAP_PROP_FRAME_WIDTH, 640);
     capture.set(CAP_PROP_FRAME_HEIGHT, 480);
 
+    // Load the constellation template images
+    std::vector<Mat> constellationTemplates;
+    constellationTemplates.push_back(imread("constellation1.jpg", IMREAD_GRAYSCALE));
+    constellationTemplates.push_back(imread("constellation2.jpg", IMREAD_GRAYSCALE));
+
     // Create a vector to store the input images
     std::vector<Mat> inputImages;
 
@@ -62,23 +68,20 @@ int main() {
             stackedImage.convertTo(displayImage, CV_16U, 256.0 / 65535.0);
             cvtColor(displayImage, displayImage, COLOR_GRAY2RGB);
 
+            // Detect constellations in the stacked image and draw the lines connecting the stars
+            //Size referenceSize(100, 100); // Set the reference size for the constellation templates
+            //drawConstellations(displayImage, referenceSize);
+
             // Send the image data to the TFT screen using SPI
             digitalWrite(TFT_CS, LOW);
             digitalWrite(TFT_DC, HIGH);
             wiringPiSPIDataRW(0, (unsigned char*)displayImage.data, 320 * 240 * 2);
             digitalWrite(TFT_CS, HIGH);
 
+            // Clear the input images vector
             inputImages.clear();
         }
-
-        // Exit if the user presses the ESC key
-        if (waitKey(1) == 27) {
-            break;
-        }
     }
-
-    // Release the video capture device
-    capture.release();
 
     return 0;
 }
