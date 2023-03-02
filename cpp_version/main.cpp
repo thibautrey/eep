@@ -30,8 +30,6 @@ int main() {
         Mat frame;
         capture.read(frame);
 
-        // Align and remove light pollution from the frame
-        alignImage(frame);
         removeLightPollution(frame);
 
         // Add the frame to the list of input images
@@ -39,6 +37,8 @@ int main() {
 
         // If we have enough input images, stack them and display the result on the default display
         if (inputImages.size() >= 10) {
+            alignImages(inputImages);
+            
             Mat stackedImage;
             stackImages(inputImages, stackedImage);
 
@@ -46,7 +46,7 @@ int main() {
             Mat displayImage;
             stackedImage.convertTo(displayImage, CV_16U, 256.0 / 65535.0);
             cvtColor(displayImage, displayImage, COLOR_GRAY2RGB);
-
+            
             // Detect constellations in the stacked image and draw the lines connecting the stars
             //Size referenceSize(100, 100); // Set the reference size for the constellation templates
             //drawConstellations(displayImage, referenceSize);

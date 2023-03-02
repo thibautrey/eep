@@ -10,6 +10,8 @@ void drawConstellations(Mat& displayImage, Size referenceSize) {
     // Load the constellation template images from the constellation_templates folder
     static std::vector<Mat> constellationTemplates;
     static std::vector<std::string> constellationNames;
+    std::vector<int> matchedContours;
+
     static bool initialized = false;
     if (!initialized) {
         DIR* dir;
@@ -99,7 +101,7 @@ void drawConstellations(Mat& displayImage, Size referenceSize) {
             putText(displayImage, constellationName, textOrg, FONT_HERSHEY_SIMPLEX, 0.5, Scalar(255, 255, 255), 1, LINE_AA);
         }
     }
-
+    
     // Fade out contours that were not matched in the current frame
     for (int i = 0; i < lastContours.size(); i++) {
         if (lastContourFrames[i] >= 0) {
