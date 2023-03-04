@@ -17,6 +17,10 @@ from astroquery.simbad import Simbad
 from astropy.utils.data import download_file
 from astropy.visualization import make_lupton_rgb
 
+# Define GPIO pins for buttons
+button1_pin = 17
+button2_pin = 27
+button3_pin = 22
 
 # Set up GPIO buttons
 GPIO.setmode(GPIO.BCM)
