@@ -30,7 +30,7 @@ GPIO.setmode(GPIO.BCM)
 
 # Set up camera and display
 camera = picamera.PiCamera()
-camera.resolution = (480, 480)
+camera.resolution = (1920, 1080)
 camera.framerate = 10
 camera.vflip = True
 camera.hflip = True
