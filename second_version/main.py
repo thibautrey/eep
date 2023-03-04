@@ -18,15 +18,15 @@ from astropy.utils.data import download_file
 from astropy.visualization import make_lupton_rgb
 
 # Define GPIO pins for buttons
-button1_pin = 17
-button2_pin = 27
-button3_pin = 22
+#button1_pin = 17
+#button2_pin = 27
+#button3_pin = 22
 
 # Set up GPIO buttons
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(button1_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(button2_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(button3_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+#GPIO.setup(button1_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+#GPIO.setup(button2_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+#GPIO.setup(button3_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 # Set up camera and display
 camera = picamera.PiCamera()
@@ -172,7 +172,7 @@ def live_view():
             else:
                 display = display_image(stacked_image)
             image_list = []
-        if GPIO.input(button1_pin) == GPIO.LOW:
+        """ if GPIO.input(button1_pin) == GPIO.LOW:
             mode = switch_mode(mode)
             break
         if GPIO.input(button2_pin) == GPIO.LOW:
@@ -185,7 +185,7 @@ def live_view():
             break
         if GPIO.input(button3_pin) == GPIO.LOW:
             object_coordinates = detect_object(stacked_image)
-            break
+            break """
     return display, mode
 
 # Define function to capture and save image
@@ -213,7 +213,7 @@ def display_images():
 # Define function to control capture and display mode
 def capture_display():
     while True:
-        if GPIO.input(button1_pin) == GPIO.LOW:
+        """ if GPIO.input(button1_pin) == GPIO.LOW:
             mode = switch_mode(mode)
             break
         if GPIO.input(button2_pin) == GPIO.LOW:
@@ -221,7 +221,7 @@ def capture_display():
             break
         if GPIO.input(button3_pin) == GPIO.LOW:
             display = display_images()
-            break
+            break """
     return display, mode
 
 # Define function to get object information using astrometry
